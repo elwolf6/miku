@@ -245,6 +245,27 @@ const narrationSlice = createSlice({
         }
       }
     },
+    deleteNode(
+      state, action: PayloadAction<string>
+    ) {
+      const interaction = state.interactions[action.payload]
+      if (interaction) {
+        interaction.responsesId.forEach((responseId) => {
+          const response = state.responses[responseId]
+          if (response) {
+            delete state.responses[responseId]
+          }
+        })
+        delete state.interactions[action.payload]
+        return
+      }
+
+      const response = state.responses[action.payload]
+      if (response) {
+        delete state.responses[action.payload]
+        return
+      }
+    },
     updateInteraction(
       state,
       action: PayloadAction<{
@@ -278,6 +299,7 @@ export const {
   continueResponse,
   swipeResponse,
   updateResponse,
+  deleteNode,
   updateInteraction,
 } = narrationSlice.actions
 

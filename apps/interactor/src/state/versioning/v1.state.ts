@@ -150,6 +150,10 @@ export interface SettingsState {
     edit: {
       opened: boolean
       id: string
+    },
+    deleteNodeConfirmation: {
+      opened: boolean
+      id: string
     }
   }
 }
